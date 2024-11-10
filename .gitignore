@@ -23,3 +23,5 @@ go.work.sum
 
 # env file
 .env
+my_interest_data.json
+interest
