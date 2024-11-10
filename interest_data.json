@@ -1,0 +1,44 @@
+[
+    {
+        "year": 2024,
+        "month": "April",
+        "actualInterest": 120.0,
+        "currentProductName": "N26 Smart"
+    },
+    {
+        "year": 2024,
+        "month": "May",
+        "actualInterest": 219.6,
+        "currentProductName": "N26 Smart"
+    },
+    {
+        "year": 2024,
+        "month": "June",
+        "actualInterest": 236.1,
+        "currentProductName": "N26 Smart"
+    },
+    {
+        "year": 2024,
+        "month": "July",
+        "actualInterest": 242.4,
+        "currentProductName": "N26 Smart"
+    },
+    {
+        "year": 2024,
+        "month": "August",
+        "actualInterest": 274.7,
+        "currentProductName": "N26 Smart"
+    },
+    {
+        "year": 2024,
+        "month": "September",
+        "actualInterest": 319.3,
+        "currentProductName": "N26 Smart"
+    },
+    {
+        "year": 2024,
+        "month": "October",
+        "actualInterest": 209.1,
+        "currentProductName": "N26 Smart"
+    }
+]
