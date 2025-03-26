@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -13,6 +12,7 @@ import (
 	"time"
 
 	"github.com/olekukonko/tablewriter"
+	"github.com/spf13/cobra"
 )
 
 // Product represents a financial product (card)
@@ -37,39 +37,43 @@ type MonthlyProducts struct {
 	Products []Product `json:"products"`
 }
 
+// Global flag variables
+var (
+	jsonFileName     string
+	productsFileName string
+	csvOutput        bool
+)
+
 func main() {
-	// Define the jsondata and productsdata flags with default values
-	jsonFileName := flag.String("jsondata", "interest_data.json", "path to JSON data file")
-	productsFileName := flag.String("productsdata", "products_data.json", "path to products JSON file")
-	csvOutput := flag.Bool("csv", false, "output tables in CSV format")
-	help := flag.Bool("?", false, "show help message")
+	rootCmd := &cobra.Command{
+		Use:   "interest",
+		Short: "A tool to compare financial products and interests.",
+		Run: func(cmd *cobra.Command, args []string) {
+			monthlyData, err := loadDataFromJSON(jsonFileName)
+			if err != nil {
+				log.Fatalf("Error loading JSON data: %v", err)
+			}
 
-	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n\n", os.Args[0])
-		fmt.Println("Options:")
-		flag.PrintDefaults()
+			productsData, err := loadProductsFromJSON(productsFileName)
+			if err != nil {
+				log.Fatalf("Error loading products data: %v", err)
+			}
+
+			printInterestComparisonTable(monthlyData, productsData, csvOutput)
+			printProductComparisonTable(monthlyData, productsData, csvOutput)
+			printFutureProductComparisons(monthlyData, productsData, csvOutput)
+		},
 	}
 
-	flag.Parse()
+	// Define flags using Cobra
+	rootCmd.PersistentFlags().StringVar(&jsonFileName, "jsondata", "interest_data.json", "path to JSON data file")
+	rootCmd.PersistentFlags().StringVar(&productsFileName, "productsdata", "products_data.json", "path to products JSON file")
+	rootCmd.PersistentFlags().BoolVar(&csvOutput, "csv", false, "output tables in CSV format")
 
-	if *help {
-		flag.Usage()
-		os.Exit(0)
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
-
-	monthlyData, err := loadDataFromJSON(*jsonFileName)
-	if err != nil {
-		log.Fatalf("Error loading JSON data: %v", err)
-	}
-
-	productsData, err := loadProductsFromJSON(*productsFileName)
-	if err != nil {
-		log.Fatalf("Error loading products data: %v", err)
-	}
-
-	printInterestComparisonTable(monthlyData, productsData, *csvOutput)
-	printProductComparisonTable(monthlyData, productsData, *csvOutput)
-	printFutureProductComparisons(monthlyData, productsData, *csvOutput)
 }
 
 func loadDataFromJSON(filename string) ([]MonthlyData, error) {
