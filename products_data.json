@@ -110,5 +110,25 @@
         {"name": "Revolut Metal", "annualRate": 3, "monthlyCost": 15.99},
         {"name": "Revolut Ultra", "annualRate": 3.49, "monthlyCost": 45}
     ]
+  },
+  {
+    "year": 2025,
+    "month": "February",
+    "products": [
+        {"name": "N26 Standard", "annualRate": 1.05, "monthlyCost": 0.0},
+        {"name": "N26 Smart", "annualRate": 1.05, "monthlyCost": 4.9},
+        {"name": "N26 You", "annualRate": 1.25, "monthlyCost": 9.9},
+        {"name": "N26 Metal", "annualRate": 2.25, "monthlyCost": 16.9}
+    ]
+  },
+  {
+    "year": 2025,
+    "month": "March",
+    "products": [
+        {"name": "N26 Standard", "annualRate": 0.8, "monthlyCost": 0.0},
+        {"name": "N26 Smart", "annualRate": 0.8, "monthlyCost": 4.9},
+        {"name": "N26 You", "annualRate": 1.0, "monthlyCost": 9.9},
+        {"name": "N26 Metal", "annualRate": 2.5, "monthlyCost": 16.9}
+    ]
   }
 ]
